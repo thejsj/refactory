@@ -1,0 +1,20 @@
+{
+  "name": "refactory-example",
+  "version": "0.0.1",
+  "homepage": "https://github.com/thejsj/docs",
+  "authors": [
+    "thejsj <jorge.silva@thejsj.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ui-router": "~0.2.15",
+    "bootstrap": "~3.3.4"
+  }
+}
