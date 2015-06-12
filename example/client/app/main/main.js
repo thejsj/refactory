@@ -12,7 +12,7 @@
     vm.messages = [];
     vm.submit = submit;
 
-    MessageFactory.getMessageCollection()
+    MessageFactory.get()
      .then(function (coll) {
        vm.messages = coll;
        console.log('vm.messages');
@@ -21,7 +21,11 @@
 
     function submit() {
       if (vm.text.length > 0) {
-        MessageFactory.addMessage(vm.text);
+        MessageFactory.add({
+          text: vm.text,
+          email: 'jorge.silva.jetter@gmail.com',
+          time: (new Date()).getTime()
+        });
         vm.text = '';
       }
     }

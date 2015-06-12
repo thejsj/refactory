@@ -19,26 +19,34 @@
     //});
 
     var factory = {
-      addMessage: function (text) {
+      add: function (doc) {
         console.log('Add Message');
-        //socket.emit('message', {
-          //text: text,
-          //email: window.config.email
-        //});
-      },
-      getMessageCollection: function () {
-        console.log('$http getMessageColelction');
-        return $http.get('/refactory/messages')
+        console.log('doc', doc);
+        return $http.post('/refactory/message', {
+          'document': doc
+        })
           .then(function (res) {
-            console.log('res');
+            console.log('add');
             console.log(res);
-            messageCollection = res;
+          })
+          .catch(function (err) {
+            console.log('Error', err);
+          });
+      },
+      get: function () {
+        console.log('$http getMessageColelction');
+        return $http.get('/refactory/message')
+          .then(function (res) {
+            console.log(res.data);
+            messageCollection = res.data;
             return messageCollection;
           })
           .catch(function (err) {
             console.log('Error', err);
           });
       }
+      // TODO: Add Update
+      // TODO: Add Delete
     };
     return factory;
   }
