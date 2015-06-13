@@ -26,7 +26,7 @@ var refactory = require('refactory');
 
 var app = express();
 app.use(refactory.expess({
-  tables: ['messages', 'users']
+  models: ['message', 'user']
 }));
 
 app.listen(8000);
@@ -41,20 +41,28 @@ Client Side:
 
 ```javascript
 angular.module('rethinkDBWorkshop.services', [])
-  .factory('MessageFactory', function (reFactory) {
-      return rethinkDBFactory({
-          table: 'messages'
+  .factory('MessageFactory', function (refactory) {
+      return refactoryFactory({
+          model: 'message'
       });
   })
-  .factory('UserFactory', function (reFactory) {
-      return rethinkDBFactory({
-          table: 'users'
+  .factory('UserFactory', function (refactory) {
+      return refactoryFactory({
+          model: 'user'
       });
   })
   .controller('MainController', function (MessageFactory) {
-    var messages = MessageFactory.getAll();
+    var messages = MessageFactory.get();
     messages.forEach(function (row) {
       console.log(row);
+    });
+    setTimeout(function () {
+      // The collection of messages will be saved to the database, and then
+      // added to the collection in the client
+      MessageFactory.add({
+        'name': 'jorge',
+        'age': 99
+      });
     });
   });
 ```
