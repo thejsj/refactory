@@ -10,9 +10,7 @@ var routeGenerator = require('./route-generator');
 
 var refactory = function refactory (opts) {
 
-  var httpServer = http.Server(opts.app);
-  console.log('Starting Socket.io server');
-  var io = socketio(httpServer);
+  var io = socketio(opts.httpServer);
 
   var config =  { db: 'refactory' };
   var models = opts.models;
@@ -36,15 +34,26 @@ var refactory = function refactory (opts) {
     // Generate all routes
     models.forEach(routeGenerator.bind(null, router, r, config));
     // Start listening on all tables
+    models.forEach(function (model) {
+      // Separate connection for every model
+      r.connect(config)
+       .then(function (conn){
+        return r.table(model).changes().run(conn)
+         .then(function (cursor) {
+           cursor.each(function (err, row) {
+             io.emit(model, row);
+           });
+         });
+       });
+    });
+
   });
 
   router.use('/client.js', function (req, res) {
     // Return Socket.io client and angular client
-    var p = path.dirname(__dirname) + '/client/refactory.js';
+    var p = path.dirname(__dirname) + '/client/dist/client.js';
     res.sendFile(p);
   });
-
-
 
   return router;
 };

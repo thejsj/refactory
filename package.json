@@ -4,7 +4,8 @@
   "description": "Automatically create factories tied to your RethinkDB tables, that are listening in realtime to changes in your data.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./node_modules/browserify/bin/cmd.js ./client/src/refactory.js -o ./client/dist/client.js",
+    "postinstall": "npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +17,10 @@
     "express": "^4.12.4",
     "rethinkdb": "^2.0.0-2",
     "rethinkdb-init": "0.0.4",
-    "socket.io": "^1.3.5"
+    "socket.io": "^1.3.5",
+    "socket.io-client": "^1.3.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "browserify": "^10.2.4",
+  }
 }

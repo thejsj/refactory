@@ -1,8 +1,10 @@
 /*global angular:true */
 (function () {
   'use strict';
-  angular.module('refactoryExample', [
+
+  var app = angular.module('refactoryExample', [
       'ui.router',
+      'refactory',
       'refactoryExample.services',
       'refactoryExample.messages'
     ])

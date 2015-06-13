@@ -15,8 +15,6 @@
     MessageFactory.get()
      .then(function (coll) {
        vm.messages = coll;
-       console.log('vm.messages');
-       console.log(vm.messages);
      });
 
     function submit() {
