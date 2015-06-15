@@ -12,6 +12,10 @@
   "directories": {
     "example": "example"
   },
+  "preferGlobal": true,
+  "bin": {
+    "refactory": "bin/refactory.js"
+  },
   "dependencies": {
     "body-parser": "^1.12.4",
     "cli": "^0.8.0",
