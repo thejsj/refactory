@@ -5,16 +5,16 @@
   angular.module('refactoryExample.messages', ['ui.router'])
     .controller('MessagesController', MessagesController);
 
-  MessagesController.$inject = ['$scope', '$window', 'MessageFactory'];
+  MessagesController.$inject = ['$scope', '$window', 'messageFactory'];
 
-  function MessagesController($scope, $window, MessageFactory) {
+  function MessagesController($scope, $window, messageFactory) {
     var vm = this;
-    vm.messages = MessageFactory();
+    vm.messages = messageFactory();
     vm.submit = submit;
 
     function submit() {
       if (vm.text.length > 0) {
-        MessageFactory.insert({
+        messageFactory.insert({
           text: vm.text,
           email: 'jorge.silva.jetter@gmail.com',
           time: (new Date()).getTime()

@@ -86,45 +86,45 @@ httpServer.listen(3000);
 
 ```javascript
 angular.module('rethinkDBWorkshop.services', [])
-  .factory('MessageFactory', refactoryFactory, function (refactoryFactory) {
+  .factory('messageFactory', refactoryFactory, function (refactoryFactory) {
       return refactoryFactory({
           model: 'message'
       });
   })
-  .factory('UserFactory', refactoryFactory, function (refactoryFactory) {
+  .factory('userFactory', refactoryFactory, function (refactoryFactory) {
       return refactoryFactory({
           model: 'user'
       });
   })
-  .controller('MainController', function (MessageFactory) {
+  .controller('MainController', function (messageFactory) {
 
     // Get the initial state of messages (might be an empty array)
-    var messages = MessageFactory();
+    var messages = messageFactory();
 
     messages.forEach(function (row) {
       console.log(row);
     });
 
     // Get all documents
-    MessageFactory.get().then(funciton (messages) {
+    messageFactory.get().then(funciton (messages) {
       console.log(messages);
     });
 
     // The collection of messages will be saved to the database, and then
     // added to the collection in the client
-    MessageFactory.insert({
+    messageFactory.insert({
       'name': 'jorge',
       'age': 99
     });
 
     // update document in database
-    MessageFactory.update({
+    messageFactory.update({
       id: "bf91cf63-55a7-47bd-8c68-a2396738b34f"
       text: 'hello world!'
     });
 
     // Delete document in database
-    MessageFactory.delete({
+    messageFactory.delete({
       id: "bf91cf63-55a7-47bd-8c68-a2396738b34f"
     });
 

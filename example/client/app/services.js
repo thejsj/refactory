@@ -3,11 +3,11 @@
   'use strict';
 
   angular.module('refactoryExample.services', [])
-    .factory('MessageFactory', MessageFactory);
+    .factory('messageFactory', messageFactory);
 
-  MessageFactory.$inject = ['refactoryFactory'];
+  messageFactory.$inject = ['refactoryFactory'];
 
-  function MessageFactory (refactoryFactory) {
+  function messageFactory (refactoryFactory) {
     return refactoryFactory({ model: 'message' });
   }
 

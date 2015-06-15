@@ -53,17 +53,15 @@
             return collection;
           };
 
-          factory.add = function (doc) {
+          factory.insert = function (doc) {
             return $http.post(httpUrl, {
               'document': doc
             });
           };
 
           factory.get = function () {
-            console.log('Start with $get');
             return $http.get(httpUrl)
               .then(function (res) {
-                console.log('Done with $get');
                 // We don't want to break the reference to this array in other
                 // parts of our code. Hence we need to remove all elements and
                 // add them to the array one by one
