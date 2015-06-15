@@ -12,9 +12,12 @@ var refactory = function refactory (opts) {
 
   var io = socketio(opts.httpServer);
 
-  var config =  { db: 'refactory' };
+  var config =  {};
+  config.db = opts.db_name || 'refactory';
+  config.host = opts.db_host || 'localhost';
+  config.port = opts.db_port || 28015;
+
   var models = opts.models;
-  var socketPort = opts.socketPort;
   var router = express.Router();
 
   router

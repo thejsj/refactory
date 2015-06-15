@@ -27,21 +27,23 @@
             $rootScope.$apply(function () {
               if (data.old_val === null) {
                 // Document is getting inserted
-                var newIndex = collection.push(data.new_val);
-                collectionIds[data.new_val] = newIndex;
+                var newIndex = collection.push(data.new_val) - 1;
+                collectionIds[data.new_val.id] = newIndex;
               } else if (data.new_val === null){
                 // Documented is getting deleted
-                var delete_index = collectionIds[data.new_val];
-                var oldVal = collection.splice(delete_index, 1)[0];
+                var delete_index = collectionIds[data.old_val.id];
+                var oldVal = collection.splice(delete_index, 1);
                 // Update Indexes
                 for (var key in collectionIds) {
-                  if (collectionIds[key] > key) {
+                  if (collectionIds[key] === delete_index) {
+                    delete collectionIds[key];
+                  } else if (collectionIds[key] > delete_index) {
                     collectionIds[key] -= 1;
                   }
                 }
               } else if (data.new_val.id === data.old_val.id) {
                 // Document is getting updated
-                var update_index = collectionIds[data.new_val.id];
+                var update_index = collectionIds[data.old_val.id];
                 collection[update_index] = data.new_val;
               }
             });

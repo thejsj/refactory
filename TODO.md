@@ -1,7 +1,7 @@
 ## TODO
 
 [ ] Improve README to clearly explain what this is
-[ ] Add defensive programming for options 
+[ ] Add defensive programming for options
 [ ] Add defensive programming for add/update/delete
 [ ] Add CLI in order to load up refactory from any directory
 
