@@ -9,17 +9,12 @@
 
   function MessagesController($scope, $window, MessageFactory) {
     var vm = this;
-    vm.messages = [];
+    vm.messages = MessageFactory();
     vm.submit = submit;
-
-    MessageFactory.get()
-     .then(function (coll) {
-       vm.messages = coll;
-     });
 
     function submit() {
       if (vm.text.length > 0) {
-        MessageFactory.add({
+        MessageFactory.insert({
           text: vm.text,
           email: 'jorge.silva.jetter@gmail.com',
           time: (new Date()).getTime()

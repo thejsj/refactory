@@ -49,35 +49,51 @@
             });
           });
 
-          var factory = {
-            add: function (doc) {
-              return $http.post(httpUrl, {
-                'document': doc
-              });
-            },
-            get: function () {
-              return $http.get(httpUrl)
-                .then(function (res) {
-                  collection = res.data;
-                  // Map ids to their indexes
-                  collection.forEach(function (row, i) {
-                    collectionIds[row.id] = i;
-                  });
-                  return collection;
-                });
-            },
-            update: function (doc) {
-              return $http.put(httpUrl, {
-                'id': doc.id,
-                'document': doc
-              });
-            },
-            delete: function (doc) {
-              return $http.delete(httpUrl, {
-                'id': doc.id
-              });
-            }
+          var factory = function () {
+            return collection;
           };
+
+          factory.add = function (doc) {
+            return $http.post(httpUrl, {
+              'document': doc
+            });
+          };
+
+          factory.get = function () {
+            console.log('Start with $get');
+            return $http.get(httpUrl)
+              .then(function (res) {
+                console.log('Done with $get');
+                // We don't want to break the reference to this array in other
+                // parts of our code. Hence we need to remove all elements and
+                // add them to the array one by one
+                collection.splice(0, collection.length);
+                res.data.forEach(function (row) {
+                  collection.push(row);
+                });
+                // Map ids to their indexes
+                collection.forEach(function (row, i) {
+                  collectionIds[row.id] = i;
+                });
+                return collection;
+              });
+          };
+
+          factory.update = function (doc) {
+            return $http.put(httpUrl, {
+              'id': doc.id,
+              'document': doc
+            });
+          };
+
+          factory.delete = function (doc) {
+            return $http.delete(httpUrl, {
+              'id': doc.id
+            });
+          };
+
+          // Get the initial state of messages
+          factory.get();
           return factory;
         };
       };

@@ -8,7 +8,7 @@ var assign = require('lodash/object/assign');
 var taser = require('taser');
 
 cli.parse({
-  models:     [false, 'Comma separated lists of models you wish to make available', 'string', ''],
+  models:     [false, 'Comma separated list of models you wish to make available', 'string', ''],
 
   port:       [false, 'Port number in which refactory should listen for traffic', 'number', 3000],
   public_dir: [false, 'Directory from which to server static assets', 'string', ''],

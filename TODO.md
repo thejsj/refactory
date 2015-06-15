@@ -1,9 +1,9 @@
 ## TODO
 
-[ ] Improve README to clearly explain what this is
+[x] Improve README to clearly explain what this is
+[x] Add CLI in order to load up refactory from any directory
 [ ] Add defensive programming for options
 [ ] Add defensive programming for add/update/delete
-[ ] Add CLI in order to load up refactory from any directory
 
 ### Data Channels
 
