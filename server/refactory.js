@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 var routeGenerator = require('./route-generator');
 
-var refactory = function refactory (opts) {
+var refactory = function (opts) {
 
   var io = socketio(opts.httpServer);
 
