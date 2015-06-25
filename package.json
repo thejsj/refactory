@@ -1,6 +1,6 @@
 {
   "name": "refactory",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Automatically create factories tied to your RethinkDB tables, that are listening in realtime to changes in your data.",
   "main": "index.js",
   "scripts": {
