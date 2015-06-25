@@ -86,17 +86,17 @@ httpServer.listen(3000);
 
 ```javascript
 angular.module('rethinkDBWorkshop.services', [])
-  .factory('messageFactory', refactoryFactory, function (refactoryFactory) {
+  .factory('messageFactory', ['refactoryFactory', function (refactoryFactory) {
       return refactoryFactory({
           model: 'message'
       });
-  })
-  .factory('userFactory', refactoryFactory, function (refactoryFactory) {
+  }])
+  .factory('userFactory', ['refactoryFactory', function (refactoryFactory) {
       return refactoryFactory({
           model: 'user'
       });
-  })
-  .controller('MainController', function (messageFactory) {
+  }])
+  .controller('MainController', ['messageFactory', function (messageFactory) {
 
     // Get the initial state of messages (might be an empty array)
     var messages = messageFactory();
@@ -106,7 +106,7 @@ angular.module('rethinkDBWorkshop.services', [])
     });
 
     // Get all documents
-    messageFactory.get().then(funciton (messages) {
+    messageFactory.get().then(function (messages) {
       console.log(messages);
     });
 
@@ -128,7 +128,7 @@ angular.module('rethinkDBWorkshop.services', [])
       id: "bf91cf63-55a7-47bd-8c68-a2396738b34f"
     });
 
-  });
+  }]);
 ```
 
 ### CLI Options
