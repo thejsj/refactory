@@ -8,7 +8,9 @@
   messageFactory.$inject = ['refactoryFactory'];
 
   function messageFactory (refactoryFactory) {
-    return refactoryFactory({ model: 'message' });
+    return refactoryFactory({
+      model: 'message',
+    });
   }
 
 })();

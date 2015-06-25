@@ -14,7 +14,16 @@
         return function (opts)  {
 
          // Option Defaults
-         var url = opts.url || 'http://localhost:3000';
+         var host = opts.host || null;
+         var port = opts.port || null;
+         var url;
+         if (host && !port) {
+           url = host;
+         } else if (host && port){
+           url = host + ':' + port;
+         } else {
+           url = '';
+         }
          var modelName = opts.model;
          var refactoryPath = opts.refactoryPath || 'refactory';
          var httpUrl = url + '/' + refactoryPath + '/' + modelName;
